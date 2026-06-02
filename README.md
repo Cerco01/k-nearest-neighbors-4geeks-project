@@ -1,43 +1,49 @@
-# [Título del Proyecto]
+# Clasificador de calidad de vino con KNN
 
 ## Contexto
 
-[Descripción del problema de negocio y objetivo del modelo.]
+¿Puede la IA clasificar la calidad de un vino tinto usando solo su composición química? En este proyecto entreno un modelo **K-Vecinos más Cercanos (KNN)** sobre el dataset de vinos tintos del UCI ML Repository para predecir si un vino es de **baja**, **media** o **alta** calidad a partir de 11 features químicas.
 
 ## Variables del dataset
 
 | Variable | Descripción | Tipo |
 |----------|-------------|------|
-| `variable_1` | Descripción de la variable 1 | Numérico/Categórico |
-| `variable_2` | Descripción de la variable 2 | Numérico/Categórico |
-| `target` | Variable objetivo | Numérico/Categórico |
+| `fixed acidity` | Acidez fija | Numérico |
+| `volatile acidity` | Acidez volátil | Numérico |
+| `citric acid` | Ácido cítrico | Numérico |
+| `residual sugar` | Azúcar residual | Numérico |
+| `chlorides` | Cloruros | Numérico |
+| `free sulfur dioxide` | Dióxido de azufre libre | Numérico |
+| `total sulfur dioxide` | Dióxido de azufre total | Numérico |
+| `density` | Densidad | Numérico |
+| `pH` | pH | Numérico |
+| `sulphates` | Sulfatos | Numérico |
+| `alcohol` | Alcohol | Numérico |
+| `label` | Calidad (`0` baja, `1` media, `2` alta) | Categórico |
 
 ## Cómo usar este proyecto
 
 1. Clonar el repositorio.
-2. Instalar las dependencias: `pip install -r requirements.txt`
-3. Descargar el dataset y guardarlo en `data/raw/`.
-4. Abrir y ejecutar el notebook `src/explore.ipynb`.
-5. Al ejecutar el notebook se generan los datasets procesados en `data/processed/`.
+2. Instalar dependencias: `pip install -r requirements.txt`
+3. Abrir el notebook `src/explore.ipynb` y ejecutar las celdas en orden.
+4. El dataset ya está en `data/raw/winequality-red.csv`.
 
 ## Qué incluye el proyecto
 
-- Carga y exploración del dataset.
-- Análisis Exploratorio de Datos (EDA): distribuciones, correlaciones, outliers.
-- Preprocesamiento: feature engineering, split train-test, encoding, escalado.
-- Modelado base y optimización con GridSearchCV.
-- Comparación de modelos y visualización de resultados.
-- Guardado de datasets procesados en `data/processed/`.
+- Carga y exploración del dataset de vinos.
+- Mapeo de `quality` (3-8) a `label` (0-2).
+- Split train/test 80/20 con `StandardScaler`.
+- Entrenamiento de `KNeighborsClassifier` base.
+- Barrido de `k` de 1 a 20 y gráfico accuracy vs k.
+- Función `predict_wine_quality([...])` para predecir un vino nuevo.
 
 ## Archivos principales
 
-- `src/explore.ipynb`: notebook principal con EDA, modelado y conclusiones.
-- `src/apple.mplstyle`: estilo personalizado para las visualizaciones.
-- `data/raw/`: carpeta para el dataset original.
-- `data/processed/`: carpeta para los datasets procesados.
-- `models/`: carpeta para guardar modelos entrenados.
-- Los datos no se suben a Git.
+- `src/explore.ipynb`: notebook principal.
+- `data/raw/winequality-red.csv`: dataset original.
+- `data/processed/`: datasets procesados (si se guardan).
+- `models/`: modelos entrenados (si se guardan).
 
 ## Créditos
 
-Este proyecto fue realizado como parte del [Bootcamp de Data Science y Machine Learning](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) de 4Geeks Academy.
+Proyecto realizado como parte del [Bootcamp de Data Science y Machine Learning](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning) de 4Geeks Academy. Dataset: [UCI Wine Quality](https://archive.ics.uci.edu/dataset/186/wine+quality).
